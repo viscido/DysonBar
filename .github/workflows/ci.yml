@@ -21,5 +21,6 @@ jobs:
 
       - name: Tool tests (offline)
         run: |
-          python3 -m pip install --user -r tools/requirements.txt
-          python3 Tests/test_tools.py
+          python3 -m venv .venv
+          .venv/bin/pip install -r tools/requirements.txt
+          .venv/bin/python Tests/test_tools.py

@@ -1,5 +1,7 @@
 # DysonBar
 
+[![CI](https://github.com/viscido/DysonBar/actions/workflows/ci.yml/badge.svg)](https://github.com/viscido/DysonBar/actions/workflows/ci.yml)
+
 A small native macOS menu-bar app to control a Dyson purifier / heater:
 power, heat target, fan speed, oscillation, auto and night mode, sleep timer,
 live air-quality readings and filter life, one click away.
@@ -9,7 +11,7 @@ live air-quality readings and filter life, one click away.
 > same cloud service the MyDyson app uses, through an undocumented API that
 > may change or stop working at any time. Use at your own risk.
 
-![DysonBar](docs/images/DysonBar.png)
+<img src="docs/images/DysonBar.png" width="340" alt="DysonBar panel: heat, air quality and fan controls">
 
 
 ## Features
@@ -41,7 +43,7 @@ controls a device doesn't report (e.g. no heat row on non-heaters).
 ## Install
 
 ```bash
-git clone https://github.com/<you>/DysonBar.git
+git clone https://github.com/viscido/DysonBar.git
 cd DysonBar
 ./build.sh --install      # builds build/DysonBar.app, copies it to /Applications, launches it
 ```
@@ -98,11 +100,12 @@ They keep their own sign-in, separate from the app, in `~/.dyson`
 (override with `DYSON_HOME`; files are owner-only).
 
 ```bash
-python3 -m pip install --user -r tools/requirements.txt
-python3 tools/dyson_login.py --country IT            # sign in (email code), saves ~/.dyson
-python3 tools/dyson_iot.py status                    # state + sensors via the cloud
-python3 tools/dyson_iot.py set '{"fnsp":"0005"}'     # fan speed 5
-python3 tools/dyson_local.py --host <device-ip> status   # try the LAN interface
+python3 -m venv .venv
+.venv/bin/pip install -r tools/requirements.txt
+.venv/bin/python tools/dyson_login.py --country IT            # sign in (email code), saves ~/.dyson
+.venv/bin/python tools/dyson_iot.py status                    # state + sensors via the cloud
+.venv/bin/python tools/dyson_iot.py set '{"fnsp":"0005"}'     # fan speed 5
+.venv/bin/python tools/dyson_local.py --host <device-ip> status   # try the LAN interface
 ```
 
 `tools/recon/` has the probes used to map the protocol (port scan, HTTP and MQTT
@@ -114,7 +117,7 @@ probes, LAN auth matrix). Only point them at devices you own.
 ./build.sh                 # build/DysonBar.app
 Tests/run.sh               # app tests against a fake Dyson cloud (offline)
 Tests/snapshot.sh          # renders the panel in every state, light + dark, to build/snapshots/
-python3 Tests/test_tools.py  # tool tests (offline)
+.venv/bin/python Tests/test_tools.py  # tool tests (offline)
 scripts/check-secrets.sh   # scan for IPs, serials, tokens before committing
 scripts/check-secrets.sh --install-hook   # run it automatically on every commit
 ```
