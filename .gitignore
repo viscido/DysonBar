@@ -1,0 +1,26 @@
+# Build output
+build/
+*.app/
+
+# Python
+__pycache__/
+*.pyc
+
+# Account data must never be committed. The tools keep it in ~/.dyson,
+# these patterns are a second line of defence.
+.dyson/
+session.json
+manifest.json
+local_credentials.json
+otp_login.json
+iot_*.json
+mqtt_credentials*
+login_summary.json
+creds.json
+state.json
+*.log
+*.pcap
+*.zip
+
+# macOS
+.DS_Store

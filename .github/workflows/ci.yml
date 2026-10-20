@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan for secrets and personal data
+        run: scripts/check-secrets.sh
+
+      - name: Build
+        run: ./build.sh
+
+      - name: App tests (fake Dyson cloud, offline)
+        run: Tests/run.sh
+
+      - name: Tool tests (offline)
+        run: |
+          python3 -m pip install --user -r tools/requirements.txt
+          python3 Tests/test_tools.py
