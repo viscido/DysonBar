@@ -24,3 +24,6 @@ state.json
 
 # macOS
 .DS_Store
+
+# Python venv
+.venv/
