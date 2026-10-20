@@ -9,6 +9,9 @@ live air-quality readings and filter life, one click away.
 > same cloud service the MyDyson app uses, through an undocumented API that
 > may change or stop working at any time. Use at your own risk.
 
+![DysonBar](docs/images/Dysonbar.png)
+
+
 ## Features
 
 - Menu bar: device icon plus live room temperature (or `Off`)
